@@ -1,6 +1,8 @@
 # Getting Started
 This is simple Spring Boot service for exposing `LandParcel` entity operations. The service uses in-memory H2 database as the datastore. The project was bootstrapped using [start.spring.io](https://start.spring.io/).
 
+The service exposes get_all, get_by_id, create, update and delete operations under `/landparcels` endpoint.
+
 ### Requirements
 - Java 17 +
 
@@ -9,13 +11,24 @@ Run using Spring Boot Maven plugin
 ```shell
 ./mvnw spring-boot:run
 ```
-
-### Build project
+Test create endpoint with `curl`
 ```shell
-./mvnw clean build
+curl --location --request POST 'http://localhost:8080/landparcels' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "test_land",
+    "status": "SHORT_LISTED",
+    "area": 50.0,
+    "constraints": false
+}'
 ```
 
-### Run tests
+### Build Project
+```shell
+./mvnw clean install
+```
+
+### Run Tests
 ```shell
 ./mvnw clean test
 ```
